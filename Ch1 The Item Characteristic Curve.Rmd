@@ -1,0 +1,27 @@
+---
+title: "Ch1 The Item Characteristic Curve"
+output: 
+  html_notebook:
+    theme: readable
+---
+
+# Inspiring extracts
+
+> Since most of the research has dealt with variables such as scholastic, reading, mathematical, and arithmetic abilities, the generic term “ability” is used within item response theory to refer to such latent traits. (p. 1)
+
+As a result, **ability** will be *the key feature* of an examinee. But the definition of this term is very operational here.
+
+> If one is going to measure how much of a latent trait a person has, it is necessary to have a scale of measurement, that is, a ruler having a given metric. (p. 1)
+
+Definition of the *Item Characteristic Curve*
+: > This S-shaped curve describes the relationship between **the probability of correct response to an item** and **the ability scale**. In item response theory, it is known as the item characteristic curve. (p. 2)
+
+An example curve
+
+```{r Item Characteristic Curve example, echo=FALSE, message=FALSE, warning=FALSE, paged.print=FALSE}
+theta <- seq(-3, 3, 0.1)
+p <- 1 / (1 + exp(-theta))
+plot(theta, p, type = "l")
+```
+
+> The item characteristic curve is the basic building block of item response theory and all the other constructs of the theory depend upon this curve...There are *two technical properties* of an item characteristic curve that are used to describe it. The ﬁrst is the **difﬁculty** of the item. Under item response theory, the difﬁculty of an item describes where the item functions along the ability scale..item difﬁculty is *a location index*. The second technical property is the **discrimination** of an item, which describes how well an item can differentiate between examinees having abilities below the item location and those having abilities above the item location. This property essentially reﬂects *the steepness* of the item characteristic curve in its middle section.The steeper the curve the better the item can discriminate.(p. 3)
