@@ -66,11 +66,15 @@ a_perfect <- 999
 iccplot(b = b_easy, a = a_high)
 ```
 
+From this curve, we would know that most people will answer this item correctly. This is a major property of an easy item, and it is very intuitive. On the other hand, this item could discriminate people whose abilities are in the range of [-3, 0] with a very good precision.
+
 2. An item with hard item difﬁculty and low item discrimination is to be plotted.
 
 ```{r E2}
 iccplot(b = b_hard, a = a_low)
 ```
+
+Intuitively, the low discrimination is demonstrated by the low precision of discriminating people with different abilities. And the overall probability of answer this item correctly is rather low, which also demonstrate that this item is hard intuitively.
 
 3. An item with medium item difﬁculty and low item discrimination is to be plotted.
 
