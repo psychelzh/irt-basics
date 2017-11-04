@@ -20,8 +20,96 @@ An example curve
 
 ```{r Item Characteristic Curve example, echo=FALSE, message=FALSE, warning=FALSE, paged.print=FALSE}
 theta <- seq(-3, 3, 0.1)
-p <- 1 / (1 + exp(-theta))
-plot(theta, p, type = "l")
+P <- 1 / (1 + exp(-theta))
+plot(theta, P, type = "l",
+     xlim = c(-3, 3), ylim = c(0, 1),
+     xlab = expression(paste("Ability, ", theta)),
+     ylab = expression(paste("Probability of Correct Response, P(", theta, ")")))
 ```
 
 > The item characteristic curve is the basic building block of item response theory and all the other constructs of the theory depend upon this curve...There are *two technical properties* of an item characteristic curve that are used to describe it. The ﬁrst is the **difﬁculty** of the item. Under item response theory, the difﬁculty of an item describes where the item functions along the ability scale..item difﬁculty is *a location index*. The second technical property is the **discrimination** of an item, which describes how well an item can differentiate between examinees having abilities below the item location and those having abilities above the item location. This property essentially reﬂects *the steepness* of the item characteristic curve in its middle section.The steeper the curve the better the item can discriminate.(p. 3)
+
+# Exercises
+
+```{r definition of icc plot function, message=FALSE, warning=FALSE, include=FALSE, paged.print=FALSE}
+iccplot <- function(b = 0, a = 1){
+  # 'lab' ensures ticks number are fixed
+  op <- par(lab = c(7, 5, 3))
+  theta <- seq(-3, 3, .1)
+  P <- 1 / (1 + exp(-a * (theta - b)))
+  plot(theta, P, type = "l",
+       xlim = c(-3, 3), ylim = c(0, 1),
+       xlab = "Ability",
+       ylab = "Probability of Correct Response")
+  # reset settings of parameters
+  par(op)
+}
+```
+
+```{r definition of b and a}
+b_veryeasy <- qnorm(0.005)
+b_easy <- qnorm(0.05)
+b_medium <- qnorm(0.5)
+b_hard <- qnorm(0.95)
+b_veryhard <- qnorm(0.995)
+
+a_none <- 0
+a_low <- 0.4
+a_moderate <- 1
+a_high <- 2.1
+a_perfect <- 999
+```
+
+1. An item with easy item difﬁculty and high item discrimination is to be plotted.
+
+```{r E1}
+iccplot(b = b_easy, a = a_high)
+```
+
+2. An item with hard item difﬁculty and low item discrimination is to be plotted.
+
+```{r E2}
+iccplot(b = b_hard, a = a_low)
+```
+
+3. An item with medium item difﬁculty and low item discrimination is to be plotted.
+
+```{r E3}
+iccplot(b = b_medium, a = a_low)
+```
+
+4. In this exercise, all the items will have the same level of item difﬁculty but different levels of item discrimination. The intent is to relate the steepness of the curve to the level of item discrimination.
+
+```{r E4}
+iccplot(b = b_medium, a = a_moderate)
+op <- par(new = TRUE)
+iccplot(b = b_medium, a = a_none)
+par(op)
+op <- par(new = TRUE)
+iccplot(b = b_medium, a = a_low)
+par(op)
+op <- par(new = TRUE)
+iccplot(b = b_medium, a = a_high)
+par(op)
+op <- par(new = TRUE)
+iccplot(b = b_medium, a = a_perfect)
+par(op)
+```
+
+5. In this exercise, all the items will have the same level of item discrimination but different levels of item difﬁculty. The intent is to relate the location of the item on the ability scale to its level of item difﬁculty.
+
+```{r E5}
+iccplot(b = b_veryeasy, a = a_moderate)
+op <- par(new = TRUE)
+iccplot(b = b_easy, a = a_moderate)
+par(op)
+op <- par(new = TRUE)
+iccplot(b = b_medium, a = a_moderate)
+par(op)
+op <- par(new = TRUE)
+iccplot(b = b_hard, a = a_moderate)
+par(op)
+op <- par(new = TRUE)
+iccplot(b = b_veryhard, a = a_moderate)
+par(op)
+```
