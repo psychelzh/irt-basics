@@ -1,0 +1,45 @@
+---
+title: "Ch2 Item Characteristic Curve Models"
+output:
+  html_notebook:
+    theme: readable
+---
+
+# Inspiring extracts
+
+> ...in this chapter the reader will be introduced to three mathematical models for the item characteristic curve... these models and their parameters provide a vehicle forcommunicating information about anitem’stechnical properties. For each of the three models, the mathematical equation will be used to compute the probability of correct response at several ability levels. (p. 17)
+
+## The Two-Parameter Model
+
+**Preparation knowlege**: [logistic function](https://en.wikipedia.org/wiki/Logistic_function), introduced by [Pierre François Verhulst](https://en.wikipedia.org/wiki/Pierre_François_Verhulst) in 1844-1845.
+
+**Model equation**:
+
+$$P(\theta) = \frac{1}{1 + e^{-L}} = \frac{1}{1 + e^{-a (\theta - b)}}$$
+where $a$ is the item discrimination parameter, $b$ is the item difficulty parameter, $\theta$ is the ability level.
+
+## The Rasch Model
+
+**Model equation**:
+
+$$P(\theta) = \frac{1}{1 + e^{-1 (\theta - b)}}$$
+
+What is different from the first model is that the item discrimination parameter is fixed as $1$.
+
+## The Three-Parameter Model
+
+> Birnbaum (1968) modiﬁed the twoparameter logistic model to include a parameter that represents the contribution of guessing to the probability of correct response. (p. 22)
+
+**Model equation**:
+
+$$P(\theta) = c + (1-c) \frac{1}{1 + e^{-a (\theta - b)}}$$
+
+where $c$ is the guessing parameter, assuming "the lowest and highest ability examinees may have the same probabilityofgettingtheitemcorrectbyguessing (p. 22)".
+
+Let's calculate the derivative of this equation:
+
+$$P'(\theta) = - (1 - c) \frac{(1 + e^{-a (\theta - b)})'}{(1 + e^{- a (\theta - b)})^2} = \frac{a (1-c) g(\theta)}{(1 + g(\theta)) ^ 2}$$
+
+where $g(\theta) = e^{-a (\theta - b)}$.
+
+Since $g(b) = 1$, so the slope at $\theta = b$ is $a (1 - c) / 4$.
